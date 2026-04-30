@@ -163,7 +163,7 @@ Invalid transitions return `400` with a clear error message.
 
 ## Assumptions Made
 
-- New applications always start at the `Applied` stage — this is not configurable per job.
+- New applications always start at the `Applied` stage this is not configurable per job.
 - The `X-Team-Member-Id` header returns `400 Bad Request` for missing or invalid values. `401` was considered but `400` felt more accurate since there is no authentication scheme in place.
 - Invalid `status` or `stage` filter values in query parameters are silently ignored and return all results unfiltered.
 - Submitting a score for a dimension that already has a value completely overwrites the previous score. The original `SetBy` and `SetAt` are preserved; `UpdatedBy` and `UpdatedAt` reflect the latest change.
