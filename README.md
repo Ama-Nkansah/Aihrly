@@ -8,7 +8,7 @@ A REST API for managing the recruiter-side hiring pipeline. Built with ASP.NET C
 
 A hiring pipeline API that lets recruiters and hiring managers post jobs, receive candidate applications, move candidates through stages, leave notes, and score candidates across three dimensions.
 
-The system tracks every action — who moved a candidate, who left a note, who set a score — because hiring is a team sport and accountability matters.
+The system tracks every action who moved a candidate, who left a note, who set a score because hiring is a team sport and accountability matters.
 
 ---
 
@@ -192,7 +192,7 @@ Due to time constraints this was not fully implemented. My approach would have b
 - A background worker picks up the task, writes a log line, and inserts a row into a `notifications` table with `id`, `application_id`, `type`, and `sent_at`
 - This keeps the PATCH endpoint fast and decoupled from the notification logic
 
-Given more time I would implement this using a `Channel<T>` as an in-memory queue — lightweight, no Redis or external broker needed for this scale.
+Given more time I would implement this using a `Channel<T>` as an in-memory queue lightweight, no Redis or external broker needed for this scale.
 
 ---
 
