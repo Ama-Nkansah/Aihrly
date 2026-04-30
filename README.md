@@ -187,8 +187,8 @@ I chose Option A — background notifications when an application moves to `Hire
 
 Due to time constraints this was not fully implemented. My approach would have been:
 
-- Use ASP.NET Core's built-in `BackgroundService` or `IHostedService` — no external libraries needed
-- When `PATCH /api/applications/{id}/stage` moves a candidate to `Hired` or `Rejected`, enqueue a notification task and return immediately — the endpoint never waits for the notification
+- Use ASP.NET Core's built-in `BackgroundService` or `IHostedService` no external libraries needed
+- When `PATCH /api/applications/{id}/stage` moves a candidate to `Hired` or `Rejected`, enqueue a notification task and return immediately the endpoint never waits for the notification
 - A background worker picks up the task, writes a log line, and inserts a row into a `notifications` table with `id`, `application_id`, `type`, and `sent_at`
 - This keeps the PATCH endpoint fast and decoupled from the notification logic
 
