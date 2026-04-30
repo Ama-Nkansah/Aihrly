@@ -1,0 +1,6 @@
+@Aihrly_HostAddress = http://localhost:5287
+
+GET {{Aihrly_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
