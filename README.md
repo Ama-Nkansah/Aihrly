@@ -181,12 +181,21 @@ Invalid transitions return `400` with a clear error message.
 
 ---
 
-## Approximate Hours Spent
+## Part 2 — Background Job (Option A)
 
-11 hours.
+I chose Option A — background notifications when an application moves to `Hired` or `Rejected`.
+
+Due to time constraints this was not fully implemented. My approach would have been:
+
+- Use ASP.NET Core's built-in `BackgroundService` or `IHostedService` — no external libraries needed
+- When `PATCH /api/applications/{id}/stage` moves a candidate to `Hired` or `Rejected`, enqueue a notification task and return immediately — the endpoint never waits for the notification
+- A background worker picks up the task, writes a log line, and inserts a row into a `notifications` table with `id`, `application_id`, `type`, and `sent_at`
+- This keeps the PATCH endpoint fast and decoupled from the notification logic
+
+Given more time I would implement this using a `Channel<T>` as an in-memory queue — lightweight, no Redis or external broker needed for this scale.
 
 ---
 
-## Part 2 — Background Job (Option A)
+## Approximate Hours Spent
 
-> Not implemented in this submission. Given more time I would use `IHostedService` or `BackgroundService` in ASP.NET Core to dispatch a notification when an application moves to `Hired` or `Rejected`. The PATCH stage endpoint would enqueue the job and return immediately. A background worker would then write a log line and insert a row into a `notifications` table with `id`, `application_id`, `type`, and `sent_at`.
+10 hours.
